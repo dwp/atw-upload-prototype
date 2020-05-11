@@ -11,11 +11,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 
-      <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{asset_path}}images/favicon.ico" type="image/x-icon">
+      <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="/govuk/assets/images/favicon.ico" type="image/x-icon">
       <link rel="mask-icon" href="{{asset_path}}images/govuk-mask-icon.svg" color="#0b0c0c">
-      <link rel="apple-touch-icon" sizes="180x180" href="{{asset_path}}images/govuk-apple-touch-icon-180x180.png">
-      <link rel="apple-touch-icon" sizes="167x167" href="{{asset_path}}images/govuk-apple-touch-icon-167x167.png">
-      <link rel="apple-touch-icon" sizes="152x152" href="{{asset_path}}images/govuk-apple-touch-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="/govuk/assets/images/govuk-apple-touch-icon-180x180.png">
+      <link rel="apple-touch-icon" sizes="167x167" href="/govuk/assets/images/govuk-apple-touch-icon-167x167.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="/govuk/assets/images/govuk-apple-touch-icon-152x152.png">
       <link rel="apple-touch-icon" href="{{asset_path}}images/govuk-apple-touch-icon.png">
 
 
@@ -52,7 +52,7 @@
   <header class="govuk-header " role="banner" data-module="govuk-header">
   <div class="govuk-header__container govuk-width-container">
     <div class="govuk-header__logo">
-      <a href="https://www.gov.uk/" class="govuk-header__link govuk-header__link--homepage">
+      <a href="/" class="govuk-header__link govuk-header__link--homepage">
         <span class="govuk-header__logotype">
           <svg
             aria-hidden="true"
@@ -134,7 +134,7 @@
 
               <a class="govuk-link" href="#">
 
-                                        <form action="/api/remove-upload-no-js/0" method="post">
+                                        <form action="upload" method="post">
                                             <button type="submit" name="delete"
                                                     class="moj-multi-file-upload__delete govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
                                                     value="pdf_for_print.png">
@@ -350,12 +350,32 @@
 
 
 
-  <!-- CASA -->
-<script src="/govuk/frontend/js/all.js?3.6.0"></script>
-<script src="/govuk/frontend/js/govuk-template.js?0.26.0"></script>
-<script src="/govuk/casa/js/casa.js?6.1.0"></script>
+<!-- CASA -->
+
+
+<script src="/public/javascripts/jquery-1.11.3.js"></script>
+
+
+<script src="/public/javascripts/application.js"></script>
+  <script src="/public/javascripts/auto-store-data.js"></script>
+
+  <script src="{{asset_path}}casa/casa.js?6.1.0"></script>
+
 <!-- /CASA -->
 
+
+
+{% block pageScripts %}
+ <script>
+ $( "#f-uploadChoice" ).click(function() {
+  $("").attr("action", "success")
+ });
+ $( "#f-uploadChoice-2" ).click(function() {
+  $("form.casa-journey-form").attr("action", "upload")
+ });
+ </script>
+
+ {% endblock %}
 
   </body>
 </html>
