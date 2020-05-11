@@ -1,0 +1,88 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Tactical Access to Work claim upload prototype
+{% endblock %}
+
+{% set serviceName = "Claim your Access to Work expenses" %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full-width">
+      <h1 class="govuk-heading-xl">
+        Claim your Access to Work expenses
+        <span class="govuk-caption-xl">Running on {{releaseVersion}} of the GOV.UK prototype kit</span>
+      </h1>
+
+      <p>
+        Journey for tactical solution to digitally upload payment claims for access to Work
+      </p>
+
+
+      {{ govukTable({
+        caption: "Version history for current team",
+        captionClasses: "govuk-heading-m",
+        firstCellIsHeader: true,
+        head: [
+          {
+            text: "Version"
+          },
+          {
+            text: "Date added"
+          },
+          {
+            text: "Description"
+          }
+        ],
+        rows: [
+        [
+          {
+            text: "Sprint 1 (current)"
+          },
+          {
+            text: "10 May 2020"
+          },
+          {
+            html: '<p>Testing dev version of journey. Baseline of development work</p>
+
+
+            <p><a class="govuk-button" href="/current/govuk/index">Go to start</a></p>
+
+
+<!--            <details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text"> -->
+      Full journey in screens
+  <!--   </span>
+  </summary>
+  <div class="govuk-details__text"> -->
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li><a href="/current/govuk/index">Start page</a></li>
+      <li><a href="/current/govuk/downloads">Downloads page</a> STILL TO ADD</li>
+      <li><a href="/current/govuk/email">Email signin</a></li>
+      <li><a href="/current/govuk/upload">Upload filef</a></li>
+      <li><a href="/current/govuk/check">Check uploads</a></li>
+      <li><a href="/current/govuk/success">Success</a></li>
+      </ul>
+
+<!--
+    </div>
+</details>
+-->
+
+          '
+
+          }
+          ]
+        ]
+      }) }}
+
+
+
+    </div>
+</div>
+
+{% endblock %}
