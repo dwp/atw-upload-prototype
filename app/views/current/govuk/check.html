@@ -77,6 +77,15 @@
       </a>
     </div>
 
+    <div class="govuk-header__content">
+
+        <a href="/" class="govuk-header__link govuk-header__link--service-name">
+          Claim your Access to Work expenses
+        </a>
+
+
+        </div>
+
   </div>
 </header>
 
@@ -147,6 +156,34 @@
           </dd>
 
       </div>
+{% if data['uploadChoice'] == "no" %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          File 2
+        </dt>
+        <dd class="govuk-summary-list__value">
+        completed_form.docx, 63kB
+        </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+              <a class="govuk-link" href="#">
+
+                                        <form action="upload" method="post">
+                                            <button type="submit" name="delete"
+                                                    class="moj-multi-file-upload__delete govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
+                                                    value="pdf_for_print.png">
+                                                Delete <span
+                                                        class="govuk-visually-hidden">completed_form.docx</span>
+                                            </button>
+                                        </form>
+                                    </a>
+
+          </dd>
+
+      </div>
+{% endif %}
+
 
 
 </dl>
@@ -286,7 +323,7 @@
     <p class="govuk-body">
     <br>
     <strong>Telephone:</strong><br>
-    0800 169 0154<br>
+    0800 121 0154<br>
     Monday to Friday, 9am to 5pm<br>
     Closed public holidays<br>
     <br>
