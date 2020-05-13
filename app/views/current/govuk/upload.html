@@ -1,9 +1,15 @@
+{% if not data['uploads']  %}
+{% set uploads = 1 %}
+{% else %}
+{% set uploads = data['uploads'] | int + 1  %}
+{% endif %}
+
 <!DOCTYPE html>
 <html lang="en" class="govuk-template ">
   <head>
     <meta charset="utf-8">
     <title>
-    Upload a file – Claim your Access to Work expenses – GOV.UK
+  {% if delete %}Success:  {% endif %}Upload a file – Claim your Access to Work expenses – GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -114,13 +120,20 @@
         <div class="govuk-grid-column-two-thirds">
 
 
+          {% if delete %}
+
+            <div class="moj-banner moj-banner--success" role="alert" tabindex="-1">
+                      <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25"><path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z"></path></svg>
+                      <div class="moj-banner__message">
+                        File named completed_form.docx has been deleted</div>
+                    </div>
+
+          {% endif %}
 
 
-<form action="check" method="post" autocomplete="off" novalidate class="casa-journey-form" enctype=multipart/form-data>
+
+<form action="check" method="post" autocomplete="off" novalidate class="casa-journey-form" ><!-- enctype=multipart/form-data --><!-- multipart data breaks the prototype autosave -->
   <input type="hidden" name="_csrf" value="XoGKVy5h--YdQE7BByMv_r9H3UpS6EYrrJxo" />
-
-
-
 
 
 
@@ -161,7 +174,13 @@
 
 
   <input class="govuk-file-upload" id="f-file" name="file" type="file">
+
+
 </div>
+
+
+<input type="hidden" style="display: none;" name="uploads" id="uploads" value="{{uploads}}" >
+
 
 
 
@@ -274,9 +293,9 @@ Monday to Friday, 9am to 5pm<br>
 
 
 <script src="/public/javascripts/application.js"></script>
-  <script src="/public/javascripts/auto-store-data.js"></script>
 
   <script src="{{asset_path}}casa/casa.js?6.1.0"></script>
+  <script src="/public/javascripts/auto-store-data.js"></script>
 
 <!-- /CASA -->
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>
-    Check your uploaded your files – Claim your Access to Work expenses – GOV.UK
+    {% if delete %}Success: {% endif %}Check your uploaded your files – Claim your Access to Work expenses – GOV.UK
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -111,8 +111,14 @@
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
 
+{% if delete %}
 
-
+          <div class="moj-banner moj-banner--success" role="alert" tabindex="-1" data-module="govuk-error-summary">
+                    <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25"><path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z"></path></svg>
+                    <div class="moj-banner__message">
+                      File named 	{{data['delete'] | default("completed_form.docx") }} has been deleted</div>
+                  </div>
+{% endif %}
             <h1 class="govuk-heading-l"> Check your uploaded files </h1>
             <h2 class="govuk-heading-m"> File uploads </h2>
 
@@ -143,7 +149,7 @@
 
               <a class="govuk-link" href="#">
 
-                                        <form action="upload" method="post">
+                                        <form action="upload-deleted" method="post">
                                             <button type="submit" name="delete"
                                                     class="moj-multi-file-upload__delete govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
                                                     value="pdf_for_print.png">
@@ -156,7 +162,7 @@
           </dd>
 
       </div>
-{% if data['uploadChoice'] == "no" %}
+{% if (data['uploads'] >= 2) %}
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
           File 2
@@ -169,12 +175,42 @@
 
               <a class="govuk-link" href="#">
 
-                                        <form action="upload" method="post">
+                                        <form action="check-deleted" method="post">
+                                          <input type="hidden" name="uploads" id="uploads" value="1" >
                                             <button type="submit" name="delete"
                                                     class="moj-multi-file-upload__delete govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-                                                    value="pdf_for_print.png">
+                                                    value="completed_form.docx">
                                                 Delete <span
                                                         class="govuk-visually-hidden">completed_form.docx</span>
+                                            </button>
+                                        </form>
+                                    </a>
+
+          </dd>
+
+      </div>
+{% endif %}
+
+{% if (data['uploads'] == 3) %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          File 3
+        </dt>
+        <dd class="govuk-summary-list__value">
+        third_document.jpg, 63kB
+        </dd>
+
+          <dd class="govuk-summary-list__actions">
+
+              <a class="govuk-link" href="#">
+
+                                        <form action="check-deleted" method="post">
+                                          <input type="hidden" id="uploads" name="uploads" value="2" >
+                                            <button type="submit" name="delete"
+                                                    class="moj-multi-file-upload__delete govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
+                                                    value="third_document.jpg">
+                                                Delete <span
+                                                        class="govuk-visually-hidden">third_document.jpg</span>
                                             </button>
                                         </form>
                                     </a>
@@ -194,48 +230,6 @@
 
 
 <form action="success" method="post" autocomplete="off" novalidate class="casa-journey-form" >
-  <input type="hidden" name="_csrf" value="cZhk2SGC-sHBbHqSvRhFcBZmlSGqqJxaNeu0" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
