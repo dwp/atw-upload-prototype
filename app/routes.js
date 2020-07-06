@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 
 // Add your routes here - above the module.exports line
+router.get('/DP222JP', function(req, res){
+  const file = `${__dirname}/assets/document-templates/DP222JP-0520-V2.pdf`;
+  res.download(file); // Set disposition and send it.
+});
 
 // GET SPRINT NAME - useful for relative templates
 router.use('/', (req, res, next) => {
