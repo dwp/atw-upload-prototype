@@ -1,15 +1,15 @@
-{% if not data['uploads']  %}
-{% set uploads = 1 %}
-{% else %}
-{% set uploads = data['uploads'] | int + 1  %}
-{% endif %}
-
 <!DOCTYPE html>
+
+{#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
+{%- set assetPath = '/govuk/assets' -%}
+
+
+
 <html lang="en" class="govuk-template ">
   <head>
     <meta charset="utf-8">
     <title>
-  {% if delete %}Success:  {% endif %}Upload a file – Claim your Access to Work expenses – GOV.UK
+    Claim your Access to Work expenses – Declaration
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
@@ -24,6 +24,8 @@
       <link rel="apple-touch-icon" sizes="152x152" href="/govuk/assets/images/govuk-apple-touch-icon-152x152.png">
       <link rel="apple-touch-icon" href="{{asset_path}}images/govuk-apple-touch-icon.png">
 
+      <!--[if lte IE 8]><link href="/public/stylesheets/application-ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
+      <!--[if gt IE 8]><!--><link href="/public/stylesheets/application.css" media="all" rel="stylesheet" type="text/css" /><!--<![endif]-->
 
 
   <!-- CASA -->
@@ -55,7 +57,7 @@
 
 
 
-  <header class="govuk-header " role="banner" data-module="govuk-header">
+    <header class="govuk-header " role="banner" data-module="govuk-header">
   <div class="govuk-header__container govuk-width-container">
     <div class="govuk-header__logo">
       <a href="/" class="govuk-header__link govuk-header__link--homepage">
@@ -82,7 +84,6 @@
 
       </a>
     </div>
-
     <div class="govuk-header__content">
 
         <a href="/" class="govuk-header__link govuk-header__link--service-name">
@@ -91,6 +92,7 @@
 
 
         </div>
+
 
   </div>
 </header>
@@ -111,7 +113,7 @@
     </p>
 </div>
 
-    <a href="email" class="govuk-back-link">Back</a>
+<a href="check" class="govuk-back-link">Back</a>    
 
 
         <main class="govuk-main-wrapper  govuk-main-wrapper--auto-spacing" id="main-content" role="main">
@@ -119,120 +121,53 @@
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
 
+            <h1 class="govuk-heading-xl">Declaration</h1>
 
-          {% if delete %}
-
-            <div class="moj-banner moj-banner--success" role="alert" tabindex="-1">
-                      <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25"><path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z"></path></svg>
-                      <div class="moj-banner__message">
-                        File named completed_form.docx has been deleted</div>
-                    </div>
-
-          {% endif %}
-
-
-
-<form action="check" method="post" autocomplete="off" novalidate class="casa-journey-form" ><!-- enctype=multipart/form-data --><!-- multipart data breaks the prototype autosave -->
-  <input type="hidden" name="_csrf" value="XoGKVy5h--YdQE7BByMv_r9H3UpS6EYrrJxo" />
-
-
-
-
-
-
-                    <h1 class="govuk-heading-l">
-                        Upload a file
-                    </h1>
-                    <p class="govuk-body">File types accepted are Word, PDF, JPG, BMP, PNG and TIF.</p>
-                    <p class="govuk-body">The combined size of all your files must be less than 10 MB.</p>
+            <div class="govuk-form-group">
+              <p class="govuk-body">
+                By sending the application you agree that:
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>the information is correct and complete as far as you know</li>
+                    <li>you&#39;ll pay back any money you&#39;re overpaid if you&#39;re asked to</li>
+                </ul>
+              </p>
+            </div>
+        
+            <div class="govuk-warning-text">
+              <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                <span class="govuk-warning-text__assistive">Warning</span>
+                You could be prosecuted or have to pay a financial penalty if you deliberately give the wrong or incomplete information or don&#39;t report changes.
+              </strong>
+            </div>
 
 
-
-                    <details class="govuk-details" data-module="govuk-details">
-  <summary class="govuk-details__summary">
-    <span class="govuk-details__summary-text">
-      Help if your files are too big
-    </span>
-  </summary>
-  <div class="govuk-details__text">
-
-                        <p class="govuk-body">If the combined size of the files you upload is bigger than 10MB you’ll see a message saying they cannot be sent.</p>
-                        <p class="govuk-body">If a single file is bigger than 10MB, reduce the file size if you can and try again.</p>
-                        <p class="govuk-body">If the combined size of more than one file is bigger than 10MB, try sending fewer files. Use the service again to send any remaining files.</p>
-                        <p class="govuk-body">If you still cannot upload and send your files you can post them instead.</p>
-
-  </div>
-</details>
-
-
-
-
-<div class="govuk-form-group">
-  <label class="govuk-label" for="f-file">
-    Upload a file
-  </label>
-
-
-  <input class="govuk-file-upload" id="f-file" name="file" type="file">
-
-
-</div>
-
-
-<input type="hidden" style="display: none;" name="uploads" id="uploads" value="{{uploads}}" >
-
-
-
-
-
-
-    <div class="casa-form-control-block">
-
-
-
-
-
-
-<button data-prevent-double-click="true" class="govuk-button" data-module="govuk-button" id="continue-button">
-  Continue
-</button>
-
-
-
-    </div>
-
-</form>
-
-
-
-
+<a href="success" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+    I agree - send application
+</a>
 
 <details class="govuk-details" data-module="govuk-details">
-  <summary class="govuk-details__summary">
-    <span class="govuk-details__summary-text">
-      Get help
-    </span>
-  </summary>
-  <div class="govuk-details__text">
-
-    <p class="govuk-body">
-
-<strong>Telephone:</strong><br>
-0800 121 7479<br>
-
-<strong>Textphone:</strong> <br>
-0800 121 7579<br>
-
-<a href="https://www.relayuk.bt.com/">Relay UK</a> (if you cannot hear or speak on the phone): 18001 then 0800 121 7479<br>
-
-Monday to Friday, 9am to 5pm<br>
-
-<a href="https://www.gov.uk/call-charges">Find out about call charges</a>
-</p>
-
-
-  </div>
-</details>
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+        Get help
+      </span>
+    </summary>
+    <div class="govuk-details__text">
+      
+      <p class="govuk-body">
+      <strong>Telephone</strong><br>
+      0800 121 7479<br>
+      <strong>Textphone</strong><br>
+      0800 121 7579<br>
+      <strong>Relay UK</strong> (if you cannot hear or speak on the phone):<br>
+      18001 then 0800 121 7479<br>
+      Monday to Friday, 9am to 5pm<br>
+      Closed public holidays
+  </p>
+  
+  
+    </div>
+  </details>
 
 
 
@@ -286,19 +221,18 @@ Monday to Friday, 9am to 5pm<br>
 
 
 
-<!-- CASA -->
+  <!-- CASA -->
 
 
-<script src="/public/javascripts/jquery-1.11.3.js"></script>
+  <script src="/public/javascripts/jquery-1.11.3.js"></script>
 
 
-<script src="/public/javascripts/application.js"></script>
+  <script src="/public/javascripts/application.js"></script>
+    <script src="/public/javascripts/auto-store-data.js"></script>
 
-  <script src="{{asset_path}}casa/casa.js?6.1.0"></script>
-  <script src="/public/javascripts/auto-store-data.js"></script>
+    <script src="{{asset_path}}casa/casa.js?6.1.0"></script>
 
 <!-- /CASA -->
-
 
 
   </body>
